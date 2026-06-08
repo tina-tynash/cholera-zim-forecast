@@ -1,0 +1,115 @@
+project:
+  name: "Cholera Forecasting Zimbabwe"
+  version: "1.0.0"
+  author: "Naxe"
+  seed: 42
+
+paths:
+  data_raw: "data/raw"
+  data_processed: "data/processed"
+  data_synthetic: "data/synthetic"
+  models: "models"
+  outputs: "outputs"
+  logs: "logs"
+
+database:
+  type: "sqlite"
+  sqlite_path: "data/cholera_zim.db"
+  postgresql_url: "${DATABASE_URL}"
+
+data:
+  districts:
+    - Harare
+    - Bulawayo
+    - Chitungwiza
+    - Mutare
+    - Gweru
+    - Kwekwe
+    - Kadoma
+    - Masvingo
+    - Chinhoyi
+    - Marondera
+    - Bindura
+    - Chegutu
+    - Zvishavane
+    - Redcliff
+    - Hwange
+    - Norton
+    - Ruwa
+    - Chiredzi
+    - Beitbridge
+    - Kariba
+
+  date_range:
+    start: "2018-01-01"
+    end: "2025-12-31"
+
+  forecast_horizons: [7, 14, 30]
+
+  features:
+    lag_weeks: [1, 2, 4, 8]
+    climate_vars:
+      - rainfall_mm
+      - temperature_c
+      - humidity_pct
+    socioeconomic_vars:
+      - wash_coverage_pct
+      - poverty_index
+      - population_density
+      - open_defecation_pct
+    intervention_vars:
+      - ocv_campaign_active
+      - water_trucking_active
+      - sanitation_drive_active
+
+models:
+  prophet:
+    changepoint_prior_scale: 0.05
+    seasonality_prior_scale: 10
+    seasonality_mode: "multiplicative"
+    yearly_seasonality: true
+    weekly_seasonality: true
+    daily_seasonality: false
+
+  xgboost:
+    n_estimators: 500
+    max_depth: 6
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    early_stopping_rounds: 50
+
+  lstm:
+    hidden_size: 64
+    num_layers: 2
+    dropout: 0.2
+    sequence_length: 12
+    batch_size: 32
+    epochs: 100
+    learning_rate: 0.001
+
+  ensemble:
+    method: "ridge"
+    base_models:
+      - prophet
+      - xgboost
+      - lstm
+    cv_folds: 5
+
+  evaluation:
+    test_split: 0.2
+    conformal_coverage: 0.95
+
+dashboard:
+  title: "Zimbabwe Cholera Early Warning System"
+  host: "0.0.0.0"
+  port: 8501
+  map_center:
+    lat: -19.0
+    lon: 29.8
+  map_zoom: 6
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 2

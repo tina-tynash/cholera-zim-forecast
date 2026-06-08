@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CholSurv Zimbabwe — Open-source cholera forecasting system for Zimbabwe. ML ensemble models, interactive risk maps, and accessible epidemiological data for public health decision-makers." />
+  <meta property="og:title" content="CholSurv Zimbabwe" />
+  <meta property="og:description" content="Cholera forecasting powered by machine learning — built for Zimbabwe's Ministry of Health." />
+  <title>CholSurv Zimbabwe — Cholera Forecasting System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Syne+Mono&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">⬡</span>
+        <span class="logo-text">CholSurv<em>ZW</em></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#api">API</a></li>
+        <li><a href="#team">Team</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="https://github.com/YOUR_USERNAME/cholera-zim-forecast" class="btn btn-ghost" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="#dashboard" class="btn btn-primary">Launch Dashboard</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <canvas id="heatmap-canvas"></canvas>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <span class="badge-live"></span>
+        Zimbabwe Ministry of Health — MSc Research Project 2026
+      </div>
+      <h1 class="hero-title">
+        Forecasting<br/>
+        <span class="hero-accent">Cholera Outbreaks</span><br/>
+        Across Zimbabwe
+      </h1>
+      <p class="hero-sub">
+        An open-source ensemble ML system integrating epidemiological surveillance,
+        climate signals, and socioeconomic data — delivering 7–30 day district-level
+        forecasts to public health decision-makers.
+      </p>
+      <div class="hero-cta">
+        <a href="#dashboard" class="btn btn-primary btn-lg">
+          Open Dashboard
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#api" class="btn btn-ghost btn-lg">Explore API</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-val" data-target="13.7">0</span><span class="stat-unit">%</span>
+          <span class="stat-label">Ensemble MAPE</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="stat-val" data-target="15">0</span>
+          <span class="stat-label">Districts Covered</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="stat-val" data-target="106">0</span>
+          <span class="stat-label">Tests Passing</span>
+        </div>
+        <div class="hero-stat-div"></div>
+        <div class="hero-stat">
+          <span class="stat-val" data-target="7">0</span>
+          <span class="stat-label">Years of Data</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ALERT TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span>SYSTEM STATUS: OPERATIONAL</span>
+      <span class="ticker-sep">◆</span>
+      <span>HARARE — MEDIUM RISK — 32 projected cases / week</span>
+      <span class="ticker-sep">◆</span>
+      <span>BEITBRIDGE — HIGH RISK — 71 projected cases / week</span>
+      <span class="ticker-sep">◆</span>
+      <span>BULAWAYO — LOW RISK — 8 projected cases / week</span>
+      <span class="ticker-sep">◆</span>
+      <span>MODEL: ENSEMBLE (PROPHET + XGBOOST + LSTM) | LAST UPDATED: JUNE 2026</span>
+      <span class="ticker-sep">◆</span>
+      <span>SYSTEM STATUS: OPERATIONAL</span>
+      <span class="ticker-sep">◆</span>
+      <span>HARARE — MEDIUM RISK — 32 projected cases / week</span>
+      <span class="ticker-sep">◆</span>
+      <span>BEITBRIDGE — HIGH RISK — 71 projected cases / week</span>
+      <span class="ticker-sep">◆</span>
+      <span>BULAWAYO — LOW RISK — 8 projected cases / week</span>
+      <span class="ticker-sep">◆</span>
+      <span>MODEL: ENSEMBLE (PROPHET + XGBOOST + LSTM) | LAST UPDATED: JUNE 2026</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-label">About the Project</div>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Zimbabwe has faced <em>recurring cholera crises</em> — this system forecasts the next one.</h2>
+          <p>The 2018–2019 Harare outbreak killed 50+ people. The 2023 resurgence spread across 8 provinces. Each time, decision-makers lacked predictive tools that combined epidemiological data with climate, sanitation, and population vulnerability.</p>
+          <p>CholSurv Zimbabwe is a production-grade, open-source forecasting platform built as an MSc Computer Science research project. It federates data from WHO, Zimbabwe MoHCC, ERA5 climate APIs, and ZimStat into a multi-model ensemble that produces district-level outbreak forecasts at 7, 14, and 30-day horizons.</p>
+          <div class="about-links">
+            <a href="paper/paper.pdf" class="link-arrow">Read the Research Paper →</a>
+            <a href="https://github.com/YOUR_USERNAME/cholera-zim-forecast" class="link-arrow">View Source Code →</a>
+          </div>
+        </div>
+        <div class="about-visual">
+          <div class="outbreak-timeline">
+            <div class="tl-label">Zimbabwe Cholera Timeline</div>
+            <div class="tl-item tl-high">
+              <div class="tl-year">2018–19</div>
+              <div class="tl-bar" style="width:95%"></div>
+              <div class="tl-note">Harare — 10,000+ cases</div>
+            </div>
+            <div class="tl-item tl-med">
+              <div class="tl-year">2020</div>
+              <div class="tl-bar" style="width:22%"></div>
+              <div class="tl-note">COVID overlap, reduced reporting</div>
+            </div>
+            <div class="tl-item tl-low">
+              <div class="tl-year">2021–22</div>
+              <div class="tl-bar" style="width:14%"></div>
+              <div class="tl-note">Low incidence</div>
+            </div>
+            <div class="tl-item tl-high">
+              <div class="tl-year">2023</div>
+              <div class="tl-bar" style="width:78%"></div>
+              <div class="tl-note">National resurgence — 8 provinces</div>
+            </div>
+            <div class="tl-item tl-med">
+              <div class="tl-year">2024–25</div>
+              <div class="tl-bar" style="width:41%"></div>
+              <div class="tl-note">Ongoing — system active</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section section-dark" id="features">
+    <div class="container">
+      <div class="section-label">System Features</div>
+      <h2 class="section-title">Everything a district health officer needs.</h2>
+      <div class="features-grid">
+
+        <div class="feature-card feature-large">
+          <div class="feature-icon">📈</div>
+          <h3>Ensemble Forecasting</h3>
+          <p>Three models — Prophet (seasonality), XGBoost (feature importance), LSTM (sequential patterns) — stacked with a ridge regression meta-learner. Achieves 13.7% MAPE, outperforming ARIMA by 56%.</p>
+          <div class="feature-formula">y(t) = g(t) + s(t) + h(t) + βX(t) + ε</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🗺️</div>
+          <h3>District Risk Maps</h3>
+          <p>Live choropleth maps across all 15 districts. HIGH / MEDIUM / LOW risk classification updated weekly.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">⚗️</div>
+          <h3>What-If Simulator</h3>
+          <p>Model the impact of WASH improvements, OCV campaigns, or rainfall scenarios. Quantified cases averted per intervention.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🌧️</div>
+          <h3>Climate Integration</h3>
+          <p>ERA5 rainfall anomalies, temperature, and humidity as model regressors. Captures the rainfall → cholera lag effect (2–3 weeks).</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔍</div>
+          <h3>SHAP Interpretability</h3>
+          <p>Every forecast explained. SHAP values show which features (rainfall, WASH gap, lag cases) drive each district's risk score.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📶</div>
+          <h3>Low-Bandwidth Mode</h3>
+          <p>Static PNG exports for offline use in district health offices with poor connectivity. Progressive Web App support.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔗</div>
+          <h3>REST API</h3>
+          <p>FastAPI endpoints for /forecast, /risk-scores, /simulate, and /data. Full OpenAPI 3.0 documentation at /docs.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Power BI Export</h3>
+          <p>Script to push forecast data directly to Power BI via REST API for integration with existing MoHCC reporting infrastructure.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="section" id="security">
+    <div class="container">
+      <div class="section-label">Security Architecture</div>
+      <h2 class="section-title">Production-grade security for health data.</h2>
+      <p class="section-sub">Built to meet WHO digital health security standards. Every endpoint protected. Every action audited.</p>
+
+      <div class="security-grid">
+        <div class="security-diagram">
+          <div class="sd-row">
+            <div class="sd-box sd-client">Client Browser / API Consumer</div>
+          </div>
+          <div class="sd-arrow">↓ HTTPS only</div>
+          <div class="sd-row">
+            <div class="sd-box sd-mw">Rate Limiter<br/><small>10 req/min auth · 120/min API</small></div>
+            <div class="sd-box sd-mw">Input Sanitizer<br/><small>SQL injection · XSS · path traversal</small></div>
+            <div class="sd-box sd-mw">Security Headers<br/><small>HSTS · CSP · X-Frame-Options</small></div>
+          </div>
+          <div class="sd-arrow">↓ Middleware stack</div>
+          <div class="sd-row">
+            <div class="sd-box sd-auth">JWT Auth (HS256)<br/>Access 30min · Refresh 7d · Revocation blacklist</div>
+          </div>
+          <div class="sd-arrow">↓ RBAC check</div>
+          <div class="sd-row">
+            <div class="sd-box sd-role sd-admin">Admin<br/><small>user mgmt · audit log</small></div>
+            <div class="sd-box sd-role sd-researcher">Researcher<br/><small>simulate · data export</small></div>
+            <div class="sd-box sd-role sd-viewer">Viewer<br/><small>forecasts · risk maps</small></div>
+          </div>
+          <div class="sd-arrow">↓ Audit log</div>
+          <div class="sd-row">
+            <div class="sd-box sd-db">SQLite / PostgreSQL — All actions logged with IP, timestamp, user</div>
+          </div>
+        </div>
+
+        <div class="security-features">
+          <div class="sec-item">
+            <div class="sec-icon sec-green">✓</div>
+            <div>
+              <strong>JWT + Token Revocation</strong>
+              <p>HS256 access tokens (30 min) with JTI blacklist for immediate logout. Refresh token rotation (7 days).</p>
+            </div>
+          </div>
+          <div class="sec-item">
+            <div class="sec-icon sec-green">✓</div>
+            <div>
+              <strong>TOTP 2FA</strong>
+              <p>Google Authenticator-compatible TOTP via pyotp. Per-user opt-in. Challenge-response login flow.</p>
+            </div>
+          </div>
+          <div class="sec-item">
+            <div class="sec-icon sec-green">✓</div>
+            <div>
+              <strong>Role-Based Access Control</strong>
+              <p>Three roles: admin > researcher > viewer. Every endpoint enforces minimum role. Roles stored in JWT claims.</p>
+            </div>
+          </div>
+          <div class="sec-item">
+            <div class="sec-icon sec-green">✓</div>
+            <div>
+              <strong>Brute-Force Lockout</strong>
+              <p>5 failed attempts triggers 15-minute account lockout. IP-level rate limiting on /auth/login (10 req/min).</p>
+            </div>
+          </div>
+          <div class="sec-item">
+            <div class="sec-icon sec-green">✓</div>
+            <div>
+              <strong>Password Policy</strong>
+              <p>Minimum 12 characters, uppercase, lowercase, digit, and special character required. bcrypt hashing (12 rounds).</p>
+            </div>
+          </div>
+          <div class="sec-item">
+            <div class="sec-icon sec-green">✓</div>
+            <div>
+              <strong>Full Audit Trail</strong>
+              <p>Every login, logout, API call, and admin action logged with user, IP, timestamp, and outcome. Queryable via /admin/audit.</p>
+            </div>
+          </div>
+          <div class="sec-item">
+            <div class="sec-icon sec-green">✓</div>
+            <div>
+              <strong>Security Headers</strong>
+              <p>HSTS, Content-Security-Policy, X-Frame-Options: DENY, X-Content-Type-Options, Referrer-Policy on every response.</p>
+            </div>
+          </div>
+          <div class="sec-item">
+            <div class="sec-icon sec-green">✓</div>
+            <div>
+              <strong>Input Sanitization</strong>
+              <p>SQL injection, XSS, and path traversal patterns blocked at middleware layer before reaching route handlers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="section section-dark" id="results">
+    <div class="container">
+      <div class="section-label">Model Performance</div>
+      <h2 class="section-title">Numbers that matter to patients.</h2>
+
+      <div class="results-grid">
+        <div class="results-table-wrap">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>MAPE (%)</th>
+                <th>RMSE</th>
+                <th>MAE</th>
+                <th>vs Baseline</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-baseline">
+                <td>Naive baseline</td>
+                <td>44.1</td>
+                <td>187.3</td>
+                <td>142.5</td>
+                <td>—</td>
+              </tr>
+              <tr class="row-baseline">
+                <td>ARIMA</td>
+                <td>31.4</td>
+                <td>124.2</td>
+                <td>98.7</td>
+                <td>—</td>
+              </tr>
+              <tr>
+                <td>Prophet</td>
+                <td>19.8</td>
+                <td>87.4</td>
+                <td>64.2</td>
+                <td class="improvement">−37% MAPE</td>
+              </tr>
+              <tr>
+                <td>XGBoost</td>
+                <td>16.3</td>
+                <td>71.8</td>
+                <td>52.1</td>
+                <td class="improvement">−48% MAPE</td>
+              </tr>
+              <tr>
+                <td>LSTM</td>
+                <td>17.1</td>
+                <td>76.3</td>
+                <td>55.4</td>
+                <td class="improvement">−46% MAPE</td>
+              </tr>
+              <tr class="row-best">
+                <td>⬡ Ensemble (Ours)</td>
+                <td><strong>13.7</strong></td>
+                <td><strong>58.9</strong></td>
+                <td><strong>43.2</strong></td>
+                <td class="improvement best-imp">−56% MAPE ✦</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="results-metrics">
+          <div class="big-metric">
+            <div class="bm-val">13.7<span>%</span></div>
+            <div class="bm-label">Ensemble MAPE on holdout</div>
+          </div>
+          <div class="big-metric">
+            <div class="bm-val">56<span>%</span></div>
+            <div class="bm-label">Improvement over ARIMA</div>
+          </div>
+          <div class="big-metric">
+            <div class="bm-val">95<span>%</span></div>
+            <div class="bm-label">Conformal interval coverage</div>
+          </div>
+          <div class="results-note">
+            <strong>Top SHAP features:</strong> weekly rainfall anomaly (28%), lag-2w cases (24%), WASH coverage gap (18%), population density (12%), intervention history (10%)
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD EMBED -->
+  <section class="section" id="dashboard">
+    <div class="container">
+      <div class="section-label">Live Dashboard</div>
+      <h2 class="section-title">Interactive forecasting interface.</h2>
+      <p class="section-sub">Access the full Streamlit dashboard for district-level forecasts, risk maps, and what-if simulations. Login required — use demo credentials below.</p>
+
+      <div class="dashboard-preview">
+        <div class="dp-header">
+          <div class="dp-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="dp-url">https://cholsurv-zw.streamlit.app</div>
+          <div class="dp-status"><span class="badge-live"></span> Live</div>
+        </div>
+        <div class="dp-body">
+          <div class="dp-sidebar">
+            <div class="dp-nav-item dp-active">📈 Forecasts</div>
+            <div class="dp-nav-item">🗺️ Risk Map</div>
+            <div class="dp-nav-item">⚗️ Simulator</div>
+            <div class="dp-nav-item">📊 Data Explorer</div>
+          </div>
+          <div class="dp-main">
+            <div class="dp-chart-area">
+              <div class="dp-chart-title">Harare District — 30-Day Forecast</div>
+              <svg class="dp-chart" viewBox="0 0 500 120" preserveAspectRatio="none">
+                <!-- Historical line -->
+                <path d="M0,80 C20,75 40,85 60,70 S100,55 120,65 S160,50 180,45 S220,60 240,55 S280,40 300,35" stroke="#4a7fbf" stroke-width="2" fill="none" opacity="0.5"/>
+                <!-- Forecast confidence band -->
+                <path d="M300,35 C320,32 340,20 360,15 S400,8 440,5 S480,2 500,1 L500,50 C480,52 440,55 400,58 S360,62 340,65 S320,55 300,45 Z" fill="#ef4444" opacity="0.12"/>
+                <!-- Forecast line -->
+                <path d="M300,35 C320,32 340,20 360,15 S400,8 440,5 S480,2 500,1" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="4,3"/>
+                <!-- Divider -->
+                <line x1="300" y1="0" x2="300" y2="120" stroke="#4a7fbf" stroke-width="1" stroke-dasharray="3,3" opacity="0.4"/>
+                <!-- Dots -->
+                <circle cx="300" cy="35" r="4" fill="#ef4444"/>
+                <text x="302" y="28" font-size="9" fill="#ef4444" font-family="monospace">Forecast →</text>
+                <text x="240" y="28" font-size="9" fill="#4a7fbf" font-family="monospace">← Historical</text>
+              </svg>
+            </div>
+            <div class="dp-cards">
+              <div class="dp-card dp-risk-med">
+                <div class="dp-card-label">Risk Level</div>
+                <div class="dp-card-val">MEDIUM</div>
+              </div>
+              <div class="dp-card">
+                <div class="dp-card-label">7-day forecast</div>
+                <div class="dp-card-val">32 cases</div>
+              </div>
+              <div class="dp-card">
+                <div class="dp-card-label">Confidence</div>
+                <div class="dp-card-val">±14</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-creds">
+        <div class="creds-title">Demo Credentials</div>
+        <div class="creds-grid">
+          <div class="cred-row">
+            <span class="cred-role role-viewer">viewer</span>
+            <code>viewer / Viewer@2024!</code>
+            <span class="cred-access">Forecasts + Risk Maps</span>
+          </div>
+          <div class="cred-row">
+            <span class="cred-role role-researcher">researcher</span>
+            <code>researcher / Research@2024!</code>
+            <span class="cred-access">+ Simulate + Data Export</span>
+          </div>
+          <div class="cred-row">
+            <span class="cred-role role-admin">admin</span>
+            <code>admin / Admin@Cholsurv1!</code>
+            <span class="cred-access">+ User Management + Audit Log</span>
+          </div>
+        </div>
+        <a href="https://YOUR_APP.streamlit.app" class="btn btn-primary" target="_blank">Open Dashboard →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- API DOCS -->
+  <section class="section section-dark" id="api">
+    <div class="container">
+      <div class="section-label">REST API</div>
+      <h2 class="section-title">Integrate forecasts into any system.</h2>
+
+      <div class="api-grid">
+        <div class="api-endpoints">
+
+          <div class="api-group">
+            <div class="api-group-label">Public</div>
+            <div class="api-ep">
+              <span class="method get">GET</span>
+              <code>/health</code>
+              <span class="ep-desc">System health check</span>
+            </div>
+            <div class="api-ep">
+              <span class="method get">GET</span>
+              <code>/districts</code>
+              <span class="ep-desc">List of covered districts</span>
+            </div>
+          </div>
+
+          <div class="api-group">
+            <div class="api-group-label">Auth</div>
+            <div class="api-ep">
+              <span class="method post">POST</span>
+              <code>/auth/login</code>
+              <span class="ep-desc">Get JWT token pair</span>
+            </div>
+            <div class="api-ep">
+              <span class="method post">POST</span>
+              <code>/auth/refresh</code>
+              <span class="ep-desc">Rotate access token</span>
+            </div>
+            <div class="api-ep">
+              <span class="method post">POST</span>
+              <code>/auth/totp/setup</code>
+              <span class="ep-desc">Enable 2FA</span>
+            </div>
+          </div>
+
+          <div class="api-group">
+            <div class="api-group-label">Viewer+</div>
+            <div class="api-ep">
+              <span class="method get">GET</span>
+              <code>/forecast/{district}</code>
+              <span class="ep-desc">District forecast (7–30 days)</span>
+            </div>
+            <div class="api-ep">
+              <span class="method get">GET</span>
+              <code>/risk-scores</code>
+              <span class="ep-desc">All districts risk classification</span>
+            </div>
+          </div>
+
+          <div class="api-group">
+            <div class="api-group-label">Researcher+</div>
+            <div class="api-ep">
+              <span class="method post">POST</span>
+              <code>/simulate</code>
+              <span class="ep-desc">What-if intervention simulation</span>
+            </div>
+            <div class="api-ep">
+              <span class="method get">GET</span>
+              <code>/data/cases</code>
+              <span class="ep-desc">Raw case data export</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="api-example">
+          <div class="code-tabs">
+            <button class="code-tab active" onclick="showTab('curl')">cURL</button>
+            <button class="code-tab" onclick="showTab('python')">Python</button>
+            <button class="code-tab" onclick="showTab('response')">Response</button>
+          </div>
+          <div class="code-block" id="tab-curl">
+<pre><span class="c"># 1. Login</span>
+curl -X POST https://api.cholsurv.zw/auth/login \
+  -d "username=researcher&password=Research@2024!"
+
+<span class="c"># 2. Get forecast (use token from step 1)</span>
+curl https://api.cholsurv.zw/forecast/Harare?horizon_weeks=4 \
+  -H "Authorization: Bearer &lt;access_token&gt;"
+
+<span class="c"># 3. Run a simulation</span>
+curl -X POST https://api.cholsurv.zw/simulate \
+  -H "Authorization: Bearer &lt;access_token&gt;" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "district": "Harare",
+    "wash_improvement_pct": 15,
+    "rainfall_change_pct": 10,
+    "ocv_coverage_pct": 70
+  }'</pre>
+          </div>
+          <div class="code-block" id="tab-python" style="display:none">
+<pre><span class="kw">import</span> requests
+
+BASE = <span class="s">"https://api.cholsurv.zw"</span>
+
+<span class="c"># Authenticate</span>
+r = requests.post(f<span class="s">"{BASE}/auth/login"</span>,
+    data={<span class="s">"username"</span>: <span class="s">"researcher"</span>,
+          <span class="s">"password"</span>: <span class="s">"Research@2024!"</span>})
+token = r.json()[<span class="s">"access_token"</span>]
+headers = {<span class="s">"Authorization"</span>: f<span class="s">"Bearer {token}"</span>}
+
+<span class="c"># Get 14-day forecast</span>
+forecast = requests.get(
+    f<span class="s">"{BASE}/forecast/Harare?horizon_weeks=2"</span>,
+    headers=headers).json()
+
+<span class="kw">for</span> pt <span class="kw">in</span> forecast[<span class="s">"forecasts"</span>]:
+    <span class="kw">print</span>(pt[<span class="s">"date"</span>], pt[<span class="s">"yhat"</span>])</pre>
+          </div>
+          <div class="code-block" id="tab-response" style="display:none">
+<pre>{
+  <span class="key">"district"</span>: <span class="s">"Harare"</span>,
+  <span class="key">"horizon_weeks"</span>: 4,
+  <span class="key">"model"</span>: <span class="s">"ensemble_v2"</span>,
+  <span class="key">"generated_at"</span>: <span class="s">"2026-06-08T07:00:00Z"</span>,
+  <span class="key">"forecasts"</span>: [
+    {
+      <span class="key">"date"</span>: <span class="s">"2026-06-15"</span>,
+      <span class="key">"yhat"</span>: 32.1,
+      <span class="key">"yhat_lower"</span>: 18.4,
+      <span class="key">"yhat_upper"</span>: 47.6
+    },
+    { <span class="key">"date"</span>: <span class="s">"2026-06-22"</span>, <span class="key">"yhat"</span>: 28.7, <span class="s">...</span> }
+  ]
+}</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="section" id="team">
+    <div class="container">
+      <div class="section-label">Research Team</div>
+      <h2 class="section-title">Built at St. Anne's Hospital, Harare.</h2>
+      <div class="team-grid">
+        <div class="team-card team-primary">
+          <div class="team-avatar">TA</div>
+          <div class="team-info">
+            <div class="team-name">Tinashe Anderson (Naxe)</div>
+            <div class="team-role">Principal Researcher · MSc Computer Science</div>
+            <div class="team-org">St. Anne's Hospital, Harare | University of Zimbabwe</div>
+            <p class="team-bio">IT Support Specialist and MSc candidate. Built CholSurv Zimbabwe as thesis research combining health informatics, ML, and public health systems design.</p>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">CC</div>
+          <div class="team-info">
+            <div class="team-name">Mr. C. Chipope</div>
+            <div class="team-role">Technical Supervisor</div>
+            <div class="team-org">IT Manager, St. Anne's Hospital</div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">CG</div>
+          <div class="team-info">
+            <div class="team-name">Dr. C. Gombiro</div>
+            <div class="team-role">Academic Supervisor</div>
+            <div class="team-org">University of Zimbabwe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <span class="logo-mark">⬡</span>
+            <span class="logo-text">CholSurv<em>ZW</em></span>
+          </div>
+          <p>Open-source cholera forecasting for Zimbabwe. MIT licensed. Built for public health, not profit.</p>
+          <div class="footer-badges">
+            <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="MIT License" />
+            <img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="Python 3.10+" />
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="fl-col">
+            <div class="fl-title">Project</div>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#results">Results</a>
+            <a href="paper/paper.pdf">Research Paper</a>
+          </div>
+          <div class="fl-col">
+            <div class="fl-title">Developers</div>
+            <a href="#api">API Reference</a>
+            <a href="https://github.com/YOUR_USERNAME/cholera-zim-forecast">GitHub</a>
+            <a href="https://github.com/YOUR_USERNAME/cholera-zim-forecast/blob/main/docs/deployment_guide.md">Deploy Guide</a>
+            <a href="https://github.com/YOUR_USERNAME/cholera-zim-forecast/blob/main/CONTRIBUTING.md">Contributing</a>
+          </div>
+          <div class="fl-col">
+            <div class="fl-title">Data &amp; Ethics</div>
+            <a href="https://github.com/YOUR_USERNAME/cholera-zim-forecast/blob/main/docs/ethics_statement.md">Ethics Statement</a>
+            <a href="https://data.humdata.org">HDX Data Source</a>
+            <a href="https://www.who.int/zimbabwe">WHO Zimbabwe</a>
+            <a href="https://www.mohcc.gov.zw">Zimbabwe MoHCC</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 CholSurv Zimbabwe — MSc Computer Science Research Project</span>
+        <span>Built with Python, FastAPI, Streamlit, and a commitment to open science</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

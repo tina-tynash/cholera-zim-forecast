@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — CholSurv Zimbabwe</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <style>
+    body{background:#0a0d12;color:#e0e6f0;font-family:var(--sans)}
+    nav{background:rgba(10,13,18,.92);border-bottom-color:rgba(255,255,255,.08)}
+    .nav-brand{color:#fff}.nav-links a{color:rgba(255,255,255,.5)}
+    .nav-links a:hover{color:#fff}
+    .nav-cta{background:var(--accent)!important;color:#fff!important}
+    .nav-cta:hover{background:var(--accent-d)!important}
+
+    /* Sidebar layout */
+    .app-shell{display:flex;min-height:calc(100vh - 58px);margin-top:58px}
+    .sidebar{width:220px;flex-shrink:0;background:#0d1117;border-right:1px solid rgba(255,255,255,.07);padding:1.5rem 0;position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto}
+    .sb-section{padding:.3rem 1rem .15rem;font-family:var(--mono);font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.25);margin-top:.75rem}
+    .sb-item{display:flex;align-items:center;gap:.65rem;padding:.6rem 1.25rem;font-size:.88rem;cursor:pointer;transition:background .15s;border-left:2px solid transparent;color:rgba(255,255,255,.55)}
+    .sb-item:hover{background:rgba(255,255,255,.05);color:#fff}
+    .sb-item.active{background:rgba(192,57,43,.12);border-left-color:var(--accent);color:#fff}
+    .sb-icon{font-size:1.05rem}
+
+    /* Main area */
+    .main{flex:1;padding:2rem;overflow-x:hidden}
+    .page-title{font-family:var(--serif);font-size:2rem;color:#fff;margin-bottom:.3rem}
+    .page-sub{font-size:.88rem;color:rgba(255,255,255,.4);margin-bottom:2rem}
+
+    /* Metric cards */
+    .metric-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+    @media(max-width:1000px){.metric-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.metric-grid{grid-template-columns:1fr}}
+    .metric-card{background:#0d1117;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:1.25rem}
+    .mc-label{font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.35);margin-bottom:.5rem}
+    .mc-value{font-family:var(--mono);font-size:1.8rem;font-weight:500;color:#fff}
+    .mc-sub{font-size:.78rem;margin-top:.3rem}
+    .mc-up{color:#f87171}.mc-down{color:#4ade80}.mc-flat{color:rgba(255,255,255,.35)}
+
+    /* Cards */
+    .card{background:#0d1117;border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem}
+    .card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem}
+    .card-title{font-size:1rem;font-weight:600;color:#fff}
+    .card-action{font-family:var(--mono);font-size:.75rem;padding:5px 14px;border:1px solid rgba(255,255,255,.12);border-radius:4px;background:none;color:rgba(255,255,255,.5);cursor:pointer;transition:all .15s}
+    .card-action:hover{background:rgba(255,255,255,.08);color:#fff}
+
+    /* District risk table */
+    .risk-table{width:100%;border-collapse:collapse;font-size:.87rem}
+    .risk-table th{text-align:left;padding:.55rem .75rem;font-family:var(--mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.3);border-bottom:1px solid rgba(255,255,255,.07)}
+    .risk-table td{padding:.65rem .75rem;border-bottom:1px solid rgba(255,255,255,.04)}
+    .risk-table tr:hover td{background:rgba(255,255,255,.03)}
+    .risk-bar-wrap{width:120px;background:rgba(255,255,255,.06);border-radius:2px;height:6px;overflow:hidden}
+    .risk-bar-fill{height:100%;border-radius:2px}
+    .rb-high{background:#f87171}.rb-med{background:#fbbf24}.rb-low{background:#4ade80}
+
+    /* Forecast viz */
+    .forecast-chart{height:220px;display:flex;align-items:flex-end;gap:4px;padding-bottom:28px;position:relative;margin-top:.5rem}
+    .fc-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;height:100%}
+    .fc-ci{background:rgba(248,113,113,.12);border-radius:3px 3px 0 0;width:100%;flex:1;display:flex;flex-direction:column;justify-content:flex-end}
+    .fc-bar{background:var(--accent);border-radius:3px 3px 0 0;width:100%}
+    .fc-label{font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.3);margin-top:.3rem;text-align:center}
+    .chart-y-axis{position:absolute;left:0;top:0;bottom:28px;display:flex;flex-direction:column;justify-content:space-between}
+    .y-label{font-family:var(--mono);font-size:.62rem;color:rgba(255,255,255,.2)}
+
+    /* What-if simulator */
+    .sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+    @media(max-width:700px){.sim-grid{grid-template-columns:1fr}}
+    .slider-group{margin-bottom:1.25rem}
+    .slider-label{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:.45rem}
+    .slider-label span{color:#fff;font-weight:500}
+    .slider-val{font-family:var(--mono);color:var(--accent)}
+    input[type=range]{width:100%;accent-color:var(--accent)}
+    .sim-result{background:rgba(74,222,128,.08);border:1px solid rgba(74,222,128,.2);border-radius:8px;padding:1.25rem;margin-top:.5rem}
+    .sim-result-val{font-family:var(--mono);font-size:2rem;color:#4ade80;font-weight:500}
+    .sim-result-lbl{font-size:.82rem;color:rgba(255,255,255,.5);margin-top:.3rem}
+    .sim-btn{width:100%;padding:.7rem;background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:var(--sans);font-size:.9rem;font-weight:600;cursor:pointer;margin-top:.5rem;transition:background .15s}
+    .sim-btn:hover{background:var(--accent-d)}
+
+    /* District selector */
+    .district-select{background:#141920;border:1px solid rgba(255,255,255,.12);color:#fff;padding:.5rem .75rem;border-radius:6px;font-family:var(--sans);font-size:.88rem;cursor:pointer}
+
+    /* Auth guard overlay */
+    .auth-guard{position:fixed;inset:0;background:rgba(10,13,18,.98);z-index:9998;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;text-align:center;padding:2rem}
+    .auth-guard h2{font-family:var(--serif);color:#fff;font-size:2rem}
+    .auth-guard p{color:rgba(255,255,255,.5);max-width:340px}
+
+    /* User chip in nav */
+    .user-chip{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:rgba(255,255,255,.6);background:rgba(255,255,255,.06);padding:4px 12px;border-radius:20px}
+    .user-dot{width:8px;height:8px;border-radius:50%;background:#4ade80}
+    .logout-btn{background:none;border:none;color:rgba(255,255,255,.35);font-size:.8rem;cursor:pointer;margin-left:.5rem}
+    .logout-btn:hover{color:#f87171}
+  </style>
+</head>
+<body>
+
+<!-- Auth guard — shown until JS confirms token -->
+<div class="auth-guard" id="authGuard">
+  <span style="font-size:2rem">⬡</span>
+  <h2>Checking access...</h2>
+  <p>Verifying your credentials</p>
+</div>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand"><span class="brand-hex">⬡</span> CholSurv <strong>ZW</strong></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">← Public site</a></li>
+      <li><a href="http://localhost:8501" target="_blank">Streamlit App ↗</a></li>
+      <li><a href="http://localhost:8000/docs" target="_blank">API ↗</a></li>
+      <li>
+        <div class="user-chip">
+          <div class="user-dot"></div>
+          <span id="userChip">...</span>
+          <button class="logout-btn" onclick="doLogout()">Sign out</button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="app-shell">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sb-section">Overview</div>
+    <div class="sb-item active" data-panel="overview" onclick="switchPanel(this)">
+      <span class="sb-icon">📊</span> Dashboard
+    </div>
+    <div class="sb-item" data-panel="forecast" onclick="switchPanel(this)">
+      <span class="sb-icon">📈</span> Forecasts
+    </div>
+    <div class="sb-section">Analysis</div>
+    <div class="sb-item" data-panel="simulate" onclick="switchPanel(this)">
+      <span class="sb-icon">🔬</span> What-If Simulator
+    </div>
+    <div class="sb-item" data-panel="data" onclick="switchPanel(this)">
+      <span class="sb-icon">🗄️</span> Data Explorer
+    </div>
+    <div class="sb-section">System</div>
+    <div class="sb-item" id="adminNav" style="display:none" data-panel="admin" onclick="switchPanel(this)">
+      <span class="sb-icon">⚙️</span> Admin
+    </div>
+    <div class="sb-item" data-panel="api" onclick="switchPanel(this)">
+      <span class="sb-icon">🔌</span> API Status
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- OVERVIEW PANEL -->
+    <div id="panel-overview">
+      <div class="page-title">Overview</div>
+      <div class="page-sub" id="overviewSub">Loading surveillance data...</div>
+      <div class="metric-grid" id="metricGrid"></div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">District Risk Summary</span>
+          <button class="card-action" onclick="refreshRisk()">↻ Refresh</button>
+        </div>
+        <table class="risk-table" id="riskTable">
+          <thead><tr><th>District</th><th>Cases/wk</th><th>Risk Level</th><th>Risk Score</th><th>Trend</th></tr></thead>
+          <tbody id="riskBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- FORECAST PANEL -->
+    <div id="panel-forecast" style="display:none">
+      <div class="page-title">Forecasts</div>
+      <div class="page-sub">30-day district-level predictions with 95% confidence intervals</div>
+      <div style="display:flex;gap:1rem;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap">
+        <select class="district-select" id="fcDistrict" onchange="loadForecast()">
+          <option>Loading...</option>
+        </select>
+        <select class="district-select" id="fcHorizon" onchange="loadForecast()">
+          <option value="4">4 weeks</option>
+          <option value="8" selected>8 weeks</option>
+          <option value="13">13 weeks</option>
+        </select>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title" id="fcTitle">Harare — 8-week forecast</span>
+          <span style="font-family:var(--mono);font-size:.72rem;color:rgba(255,255,255,.3)" id="fcModel">ensemble_v2</span>
+        </div>
+        <div class="forecast-chart" id="forecastChart"></div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1rem">Forecast Table</div>
+        <table class="risk-table" id="fcTable">
+          <thead><tr><th>Week</th><th>Date</th><th>Predicted Cases</th><th>Lower CI</th><th>Upper CI</th></tr></thead>
+          <tbody id="fcBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SIMULATE PANEL -->
+    <div id="panel-simulate" style="display:none">
+      <div class="page-title">What-If Simulator</div>
+      <div class="page-sub">Model the impact of public health interventions on weekly case counts</div>
+      <div id="simResearcherOnly" style="display:none">
+        <div class="card" style="text-align:center;padding:3rem;color:rgba(255,255,255,.4)">
+          🔒 Researcher or Admin role required to access the simulator.
+        </div>
+      </div>
+      <div id="simContent">
+        <div class="sim-grid">
+          <div class="card">
+            <div class="card-title" style="margin-bottom:1.25rem">Scenario Parameters</div>
+            <div style="margin-bottom:1rem">
+              <label style="font-size:.82rem;display:block;margin-bottom:.4rem">District</label>
+              <select class="district-select" id="simDistrict" style="width:100%"><option>Loading...</option></select>
+            </div>
+            <div class="slider-group">
+              <div class="slider-label"><span>WASH Coverage Improvement</span><span class="slider-val" id="washVal">0%</span></div>
+              <input type="range" min="0" max="40" value="0" id="washSlider" oninput="updateSliders()"/>
+            </div>
+            <div class="slider-group">
+              <div class="slider-label"><span>OCV Campaign Coverage</span><span class="slider-val" id="ocvVal">0%</span></div>
+              <input type="range" min="0" max="95" value="0" id="ocvSlider" oninput="updateSliders()"/>
+            </div>
+            <div class="slider-group">
+              <div class="slider-label"><span>Rainfall Change</span><span class="slider-val" id="rainVal">0%</span></div>
+              <input type="range" min="-50" max="50" value="0" id="rainSlider" oninput="updateSliders()"/>
+            </div>
+            <button class="sim-btn" onclick="runSimulation()">Run Simulation →</button>
+          </div>
+          <div class="card">
+            <div class="card-title" style="margin-bottom:1.25rem">Projected Impact</div>
+            <div class="sim-result" id="simResult">
+              <div class="sim-result-val" id="simVal">—</div>
+              <div class="sim-result-lbl" id="simLbl">Adjust parameters and run simulation</div>
+            </div>
+            <div id="simDetails" style="margin-top:1rem;font-size:.85rem;display:none">
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06)">
+                <span style="color:rgba(255,255,255,.4)">Baseline (weekly avg)</span>
+                <span style="font-family:var(--mono)" id="simBaseline">—</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.06)">
+                <span style="color:rgba(255,255,255,.4)">Projected (weekly avg)</span>
+                <span style="font-family:var(--mono)" id="simProjected">—</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding:.5rem 0">
+                <span style="color:rgba(255,255,255,.4)">Reduction</span>
+                <span style="font-family:var(--mono);color:#4ade80" id="simReduction">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA PANEL -->
+    <div id="panel-data" style="display:none">
+      <div class="page-title">Data Explorer</div>
+      <div class="page-sub">Browse and export raw case data. Researcher role required for export.</div>
+      <div class="card">
+        <div class="card-head">
+          <span class="card-title">Case Records</span>
+          <button class="card-action" id="exportBtn" onclick="exportData()">⬇ Export CSV</button>
+        </div>
+        <table class="risk-table" id="dataTable">
+          <thead><tr><th>Date</th><th>District</th><th>Cases</th><th>Deaths</th><th>CFR</th><th>Incidence</th></tr></thead>
+          <tbody id="dataBody"></tbody>
+        </table>
+        <div style="margin-top:1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap">
+          <button class="card-action" onclick="loadDataPage(-1)">← Prev</button>
+          <span style="font-size:.82rem;color:rgba(255,255,255,.4)" id="dataPager">Page 1</span>
+          <button class="card-action" onclick="loadDataPage(1)">Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div id="panel-admin" style="display:none">
+      <div class="page-title">Admin Panel</div>
+      <div class="page-sub">User management and audit log</div>
+      <div class="card">
+        <div class="card-head"><span class="card-title">Users</span></div>
+        <table class="risk-table" id="usersTable">
+          <thead><tr><th>Username</th><th>Role</th><th>Email</th><th>2FA</th><th>Last Login</th><th>Status</th></tr></thead>
+          <tbody id="usersBody"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-head"><span class="card-title">Audit Log</span></div>
+        <table class="risk-table" id="auditTable">
+          <thead><tr><th>Time</th><th>User</th><th>IP</th><th>Action</th><th>Result</th></tr></thead>
+          <tbody id="auditBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- API STATUS PANEL -->
+    <div id="panel-api" style="display:none">
+      <div class="page-title">API Status</div>
+      <div class="page-sub">Live status of the CholSurv REST API</div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1.25rem">Endpoint Health</div>
+        <div id="apiStatus"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/main.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+.venv/
+*.egg
+
+# Data (large files)
+data/raw/*.csv
+data/raw/*.json
+*.db
+*.sqlite
+
+# Secrets
+.env
+*.env
+config_local.yaml
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Models (large binary files)
+models/*.pkl
+models/*.pt
+models/*.joblib
+
+# Coverage
+htmlcov/
+.coverage
+.pytest_cache/

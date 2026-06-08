@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In — CholSurv Zimbabwe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/main.css"/>
+  <style>
+    body { display:flex; align-items:center; justify-content:center; min-height:100vh; padding:1rem; }
+    .auth-wrap { width:100%; max-width:420px; }
+    .auth-back { display:inline-flex; align-items:center; gap:6px; text-decoration:none; color:var(--text-3); font-size:0.85rem; margin-bottom:2rem; font-family:var(--mono); letter-spacing:.06em; transition:color var(--transition); }
+    .auth-back:hover { color:var(--cyan); }
+    .auth-logo { display:flex; align-items:center; gap:10px; margin-bottom:2rem; }
+    .auth-logo .logo-mark { color:var(--cyan); font-size:1.6rem; }
+    .auth-logo .logo-text { font-family:var(--mono); font-size:1rem; }
+    .auth-logo .logo-text em { font-style:normal; color:var(--cyan); }
+    .auth-card { background:var(--panel); border:1px solid var(--border); border-radius:var(--radius-lg); padding:2.5rem; }
+    .auth-card h2 { font-size:1.8rem; margin-bottom:0.5rem; }
+    .auth-subtitle { color:var(--text-3); font-size:0.88rem; margin-bottom:2rem; }
+    .form-group { margin-bottom:1.25rem; }
+    .form-label { display:block; font-size:0.82rem; font-family:var(--mono); letter-spacing:.06em; color:var(--text-3); text-transform:uppercase; margin-bottom:8px; }
+    .form-input {
+      width:100%; padding:12px 16px; border-radius:var(--radius);
+      background:var(--navy-3); border:1px solid var(--border-2);
+      color:var(--text); font-family:var(--sans); font-size:0.95rem;
+      transition:border-color var(--transition), box-shadow var(--transition);
+      outline:none;
+    }
+    .form-input:focus { border-color:var(--cyan); box-shadow:0 0 0 3px rgba(56,189,248,0.12); }
+    .form-input::placeholder { color:var(--text-3); }
+    .form-input.error { border-color:var(--red); }
+    .input-wrap { position:relative; }
+    .eye-btn { position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:var(--text-3); font-size:1rem; padding:4px; transition:color var(--transition); }
+    .eye-btn:hover { color:var(--cyan); }
+    .form-hint { font-size:0.78rem; color:var(--text-3); margin-top:6px; }
+    .error-msg { color:var(--red); font-size:0.82rem; margin-top:6px; display:none; }
+    .error-msg.show { display:block; }
+    .submit-btn {
+      width:100%; padding:13px; border-radius:var(--radius);
+      background:var(--cyan); color:var(--navy); font-weight:600; font-size:0.95rem;
+      border:none; cursor:pointer; transition:background var(--transition), transform var(--transition);
+      margin-top:0.5rem; position:relative;
+    }
+    .submit-btn:hover:not(:disabled) { background:#7dd3fc; transform:translateY(-1px); }
+    .submit-btn:disabled { opacity:0.7; cursor:not-allowed; transform:none; }
+    .submit-btn .spinner { display:none; width:18px; height:18px; border:2px solid rgba(0,0,0,0.3); border-top-color:var(--navy); border-radius:50%; animation:spin 0.7s linear infinite; margin:0 auto; }
+    .submit-btn.loading .btn-text { display:none; }
+    .submit-btn.loading .spinner { display:block; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .divider { display:flex; align-items:center; gap:12px; margin:1.5rem 0; }
+    .divider::before, .divider::after { content:''; flex:1; height:1px; background:var(--border); }
+    .divider span { font-size:0.78rem; color:var(--text-3); font-family:var(--mono); }
+    .demo-accounts { background:var(--navy-3); border:1px solid var(--border); border-radius:var(--radius); padding:16px; }
+    .demo-title { font-family:var(--mono); font-size:0.72rem; letter-spacing:.1em; color:var(--text-3); text-transform:uppercase; margin-bottom:12px; }
+    .demo-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid var(--border); font-size:0.83rem; }
+    .demo-row:last-child { border:none; padding-bottom:0; }
+    .demo-role { font-family:var(--mono); font-size:0.72rem; padding:2px 8px; border-radius:4px; }
+    .role-admin    { background:rgba(239,68,68,0.15); color:#f87171; }
+    .role-research { background:rgba(245,158,11,0.15); color:var(--amber); }
+    .role-viewer   { background:rgba(56,189,248,0.15); color:var(--cyan); }
+    .fill-demo { background:none; border:none; cursor:pointer; color:var(--cyan-dim); font-size:0.78rem; font-family:var(--mono); padding:3px 8px; border-radius:4px; transition:background var(--transition); }
+    .fill-demo:hover { background:rgba(56,189,248,0.1); }
+    .totp-section { display:none; }
+    .totp-section.show { display:block; }
+    .auth-footer { margin-top:1.5rem; text-align:center; font-size:0.85rem; color:var(--text-3); }
+    .auth-footer a { color:var(--cyan); text-decoration:none; }
+    .auth-footer a:hover { text-decoration:underline; }
+    .alert { padding:12px 16px; border-radius:var(--radius); font-size:0.88rem; margin-bottom:1rem; display:none; }
+    .alert.show { display:block; }
+    .alert-error { background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.25); color:#f87171; }
+    .alert-success { background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.25); color:#4ade80; }
+  </style>
+</head>
+<body>
+  <div class="auth-wrap">
+    <a href="index.html" class="auth-back">← Back to site</a>
+    <div class="auth-logo">
+      <span class="logo-mark">⬡</span>
+      <span class="logo-text">CholSurv<em>ZW</em></span>
+    </div>
+    <div class="auth-card">
+      <h2>Sign in</h2>
+      <p class="auth-subtitle">Access the cholera forecasting platform</p>
+
+      <div class="alert alert-error" id="alertError"></div>
+      <div class="alert alert-success" id="alertSuccess"></div>
+
+      <!-- Step 1: credentials -->
+      <div id="stepCredentials">
+        <div class="form-group">
+          <label class="form-label" for="username">Username</label>
+          <input class="form-input" type="text" id="username" placeholder="Enter username" autocomplete="username"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <div class="input-wrap">
+            <input class="form-input" type="password" id="password" placeholder="Enter password" autocomplete="current-password"/>
+            <button class="eye-btn" id="eyeBtn" type="button" aria-label="Toggle password">👁</button>
+          </div>
+        </div>
+        <button class="submit-btn" id="loginBtn" onclick="handleLogin()">
+          <span class="btn-text">Sign In →</span>
+          <div class="spinner"></div>
+        </button>
+      </div>
+
+      <!-- Step 2: TOTP -->
+      <div id="stepTotp" class="totp-section">
+        <div class="form-group">
+          <label class="form-label" for="totpCode">Authenticator Code</label>
+          <input class="form-input" type="text" id="totpCode" placeholder="000000" maxlength="6" pattern="[0-9]{6}" autocomplete="one-time-code" style="letter-spacing:.3em;font-size:1.3rem;text-align:center;font-family:var(--mono)"/>
+          <div class="form-hint">Enter the 6-digit code from your authenticator app</div>
+        </div>
+        <button class="submit-btn" id="totpBtn" onclick="handleTotp()">
+          <span class="btn-text">Verify →</span>
+          <div class="spinner"></div>
+        </button>
+        <button style="width:100%;margin-top:10px;background:none;border:none;color:var(--text-3);cursor:pointer;font-size:0.85rem;" onclick="resetToStep1()">← Back</button>
+      </div>
+
+      <div class="divider"><span>demo accounts</span></div>
+      <div class="demo-accounts">
+        <div class="demo-title">Click to auto-fill</div>
+        <div class="demo-row">
+          <span><span class="demo-role role-admin">admin</span> admin / Admin@Cholsurv1!</span>
+          <button class="fill-demo" onclick="fillDemo('admin','Admin@Cholsurv1!')">Fill</button>
+        </div>
+        <div class="demo-row">
+          <span><span class="demo-role role-research">researcher</span> researcher / Research@2024!</span>
+          <button class="fill-demo" onclick="fillDemo('researcher','Research@2024!')">Fill</button>
+        </div>
+        <div class="demo-row">
+          <span><span class="demo-role role-viewer">viewer</span> viewer / Viewer@2024!</span>
+          <button class="fill-demo" onclick="fillDemo('viewer','Viewer@2024!')">Fill</button>
+        </div>
+      </div>
+    </div>
+    <div class="auth-footer">
+      <a href="index.html">← Home</a> &nbsp;·&nbsp;
+      <a href="https://github.com/YOUR_USERNAME/cholera-zim-forecast" target="_blank">GitHub ↗</a>
+    </div>
+  </div>
+
+  <script>
+    const API = 'http://localhost:8000';
+    let challengeToken = null;
+
+    document.getElementById('eyeBtn').addEventListener('click', () => {
+      const p = document.getElementById('password');
+      p.type = p.type === 'password' ? 'text' : 'password';
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        if (document.getElementById('stepTotp').classList.contains('show')) handleTotp();
+        else handleLogin();
+      }
+    });
+
+    function fillDemo(u, p) {
+      document.getElementById('username').value = u;
+      document.getElementById('password').value = p;
+      document.getElementById('username').focus();
+    }
+
+    function showAlert(type, msg) {
+      ['alertError','alertSuccess'].forEach(id => {
+        const el = document.getElementById(id);
+        el.classList.remove('show'); el.textContent = '';
+      });
+      const el = document.getElementById(type === 'error' ? 'alertError' : 'alertSuccess');
+      el.textContent = msg; el.classList.add('show');
+    }
+
+    function setLoading(btnId, loading) {
+      const btn = document.getElementById(btnId);
+      btn.classList.toggle('loading', loading);
+      btn.disabled = loading;
+    }
+
+    async function handleLogin() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      if (!username || !password) { showAlert('error', 'Please enter username and password.'); return; }
+
+      setLoading('loginBtn', true);
+      try {
+        const form = new URLSearchParams({ username, password });
+        const r = await fetch(`${API}/auth/login`, { method: 'POST', headers: {'Content-Type':'application/x-www-form-urlencoded'}, body: form });
+        const data = await r.json();
+        if (!r.ok) { showAlert('error', data.detail || 'Login failed.'); return; }
+
+        if (data.requires_2fa) {
+          challengeToken = data.challenge_token;
+          document.getElementById('stepCredentials').style.display = 'none';
+          document.getElementById('stepTotp').classList.add('show');
+          document.getElementById('totpCode').focus();
+          showAlert('success', 'Password verified. Enter your authenticator code.');
+        } else {
+          localStorage.setItem('access_token', data.access_token);
+          localStorage.setItem('refresh_token', data.refresh_token);
+          showAlert('success', 'Signed in! Redirecting…');
+          setTimeout(() => window.location.href = 'dashboard.html', 700);
+        }
+      } catch(e) {
+        showAlert('error', 'Cannot connect to API. Is the server running on localhost:8000?');
+      } finally {
+        setLoading('loginBtn', false);
+      }
+    }
+
+    async function handleTotp() {
+      const code = document.getElementById('totpCode').value.trim();
+      if (code.length !== 6) { showAlert('error', 'Code must be 6 digits.'); return; }
+      setLoading('totpBtn', true);
+      try {
+        const r = await fetch(`${API}/auth/totp/verify`, {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ challenge_token: challengeToken, totp_code: code })
+        });
+        const data = await r.json();
+        if (!r.ok) { showAlert('error', data.detail || '2FA failed.'); return; }
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
+        showAlert('success', 'Verified! Redirecting…');
+        setTimeout(() => window.location.href = 'dashboard.html', 700);
+      } catch(e) {
+        showAlert('error', 'Connection error.');
+      } finally {
+        setLoading('totpBtn', false);
+      }
+    }
+
+    function resetToStep1() {
+      document.getElementById('stepCredentials').style.display = '';
+      document.getElementById('stepTotp').classList.remove('show');
+      challengeToken = null;
+      ['alertError','alertSuccess'].forEach(id => document.getElementById(id).classList.remove('show'));
+    }
+  </script>
+</body>
+</html>

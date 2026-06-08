@@ -1,0 +1,15 @@
+name: Deploy to Streamlit Cloud
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Notify deployment
+        run: echo "Push to main triggers Streamlit Cloud auto-deploy via GitHub integration."
+      # Streamlit Cloud auto-deploys on push to main when connected via GitHub OAuth.
+      # No additional secrets required for public repos.

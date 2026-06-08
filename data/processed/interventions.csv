@@ -1,0 +1,277 @@
+date,district,intervention_type,coverage_pct,duration_days,beneficiaries,funding_source
+2018-05-21,Bulawayo,OCV_Campaign,0.264,13,19830,USAID
+2019-03-21,Bulawayo,Water_Trucking,0.251,52,21727,USAID
+2019-06-25,Bulawayo,Water_Treatment,0.67,28,18379,MoHCC
+2019-08-06,Bulawayo,Hygiene_Promotion,0.886,51,47592,World Bank
+2019-08-20,Bulawayo,OCV_Campaign,0.88,54,22091,USAID
+2019-10-25,Bulawayo,Water_Trucking,0.231,37,45204,MoHCC
+2020-09-23,Bulawayo,WASH_Infrastructure,0.636,81,7833,UNICEF
+2021-09-10,Bulawayo,Case_Isolation,0.208,82,30662,WHO
+2022-09-03,Bulawayo,Water_Treatment,0.438,89,31186,USAID
+2022-12-09,Bulawayo,Water_Treatment,0.287,27,48090,MSF
+2024-01-06,Bulawayo,WASH_Infrastructure,0.832,78,8112,UNICEF
+2024-03-01,Bulawayo,OCV_Campaign,0.746,20,47155,USAID
+2024-08-21,Bulawayo,OCV_Campaign,0.21,25,42355,MoHCC
+2024-11-10,Bulawayo,Water_Treatment,0.556,46,4067,MSF
+2025-04-02,Bulawayo,OCV_Campaign,0.375,82,43986,UNICEF
+2025-05-26,Bulawayo,OCV_Campaign,0.529,33,23085,UNICEF
+2025-08-21,Bulawayo,Case_Isolation,0.611,43,17622,USAID
+2025-12-23,Bulawayo,Water_Trucking,0.808,41,18043,WHO
+2018-04-21,Chinhoyi,Case_Isolation,0.285,38,5315,MoHCC
+2018-05-19,Chinhoyi,OCV_Campaign,0.565,77,901,WHO
+2018-05-22,Chinhoyi,WASH_Infrastructure,0.625,65,39013,UNICEF
+2018-07-19,Chinhoyi,Case_Isolation,0.754,80,17446,MoHCC
+2018-12-03,Chinhoyi,Case_Isolation,0.369,3,38800,MSF
+2019-01-23,Chinhoyi,OCV_Campaign,0.415,76,27035,MoHCC
+2019-05-24,Chinhoyi,WASH_Infrastructure,0.586,45,30234,WHO
+2019-07-24,Chinhoyi,Water_Treatment,0.857,55,12971,WHO
+2019-09-14,Chinhoyi,Case_Isolation,0.837,72,12739,MoHCC
+2019-11-05,Chinhoyi,Case_Isolation,0.587,34,7810,MSF
+2020-07-12,Chinhoyi,Water_Treatment,0.326,34,12821,MoHCC
+2020-10-19,Chinhoyi,Water_Trucking,0.259,84,19051,World Bank
+2021-01-08,Chinhoyi,Case_Isolation,0.423,86,30400,MoHCC
+2021-01-12,Chinhoyi,WASH_Infrastructure,0.358,18,4602,MSF
+2021-01-22,Chinhoyi,OCV_Campaign,0.575,88,20821,MoHCC
+2021-05-24,Chinhoyi,Water_Treatment,0.618,56,10430,UNICEF
+2021-07-26,Chinhoyi,Hygiene_Promotion,0.38,78,25782,MoHCC
+2021-08-11,Chinhoyi,WASH_Infrastructure,0.582,80,36879,UNICEF
+2021-08-19,Chinhoyi,WASH_Infrastructure,0.641,36,5321,World Bank
+2022-05-26,Chinhoyi,Case_Isolation,0.536,4,23564,USAID
+2022-10-01,Chinhoyi,Water_Trucking,0.809,35,32965,MSF
+2023-09-15,Chinhoyi,Hygiene_Promotion,0.891,85,31103,UNICEF
+2023-09-24,Chinhoyi,Water_Treatment,0.77,21,10379,WHO
+2024-01-07,Chinhoyi,OCV_Campaign,0.688,13,17132,USAID
+2024-03-27,Chinhoyi,WASH_Infrastructure,0.755,79,8344,World Bank
+2024-07-26,Chinhoyi,Case_Isolation,0.655,52,20239,USAID
+2024-10-12,Chinhoyi,Case_Isolation,0.791,86,40095,USAID
+2024-12-17,Chinhoyi,OCV_Campaign,0.8,88,45635,MoHCC
+2025-03-05,Chinhoyi,Water_Treatment,0.589,12,10323,USAID
+2025-03-10,Chinhoyi,Water_Trucking,0.609,25,6141,WHO
+2025-06-10,Chinhoyi,Water_Trucking,0.431,31,29574,USAID
+2025-07-02,Chinhoyi,Water_Treatment,0.364,13,19248,World Bank
+2025-11-10,Chinhoyi,Hygiene_Promotion,0.422,42,22123,MoHCC
+2018-02-23,Chitungwiza,Water_Trucking,0.449,61,17047,MoHCC
+2018-05-04,Chitungwiza,Water_Treatment,0.824,32,6274,World Bank
+2019-04-06,Chitungwiza,OCV_Campaign,0.832,66,31004,WHO
+2020-06-09,Chitungwiza,Water_Treatment,0.704,79,10512,MoHCC
+2020-07-10,Chitungwiza,Hygiene_Promotion,0.894,46,10842,MSF
+2020-11-08,Chitungwiza,Water_Treatment,0.324,83,33586,USAID
+2021-01-21,Chitungwiza,Water_Trucking,0.33,35,32387,WHO
+2021-11-09,Chitungwiza,OCV_Campaign,0.86,45,3586,WHO
+2022-05-17,Chitungwiza,Water_Treatment,0.818,47,48161,World Bank
+2022-09-09,Chitungwiza,Hygiene_Promotion,0.545,68,35097,MSF
+2022-12-18,Chitungwiza,Water_Trucking,0.681,55,29241,WHO
+2023-01-06,Chitungwiza,WASH_Infrastructure,0.451,63,28177,USAID
+2023-03-08,Chitungwiza,Water_Trucking,0.484,83,2133,USAID
+2023-07-10,Chitungwiza,WASH_Infrastructure,0.611,16,44904,MoHCC
+2023-09-10,Chitungwiza,Water_Trucking,0.316,80,7159,UNICEF
+2023-10-25,Chitungwiza,Water_Trucking,0.8,22,22059,World Bank
+2024-03-03,Chitungwiza,Hygiene_Promotion,0.312,33,8702,USAID
+2024-05-10,Chitungwiza,Water_Trucking,0.64,70,43338,WHO
+2024-08-12,Chitungwiza,Water_Trucking,0.834,50,14413,World Bank
+2024-09-06,Chitungwiza,Water_Treatment,0.248,70,43553,World Bank
+2024-11-08,Chitungwiza,Case_Isolation,0.602,69,47274,MSF
+2025-02-17,Chitungwiza,OCV_Campaign,0.422,63,28710,WHO
+2025-05-11,Chitungwiza,Hygiene_Promotion,0.746,62,29714,World Bank
+2025-06-16,Chitungwiza,WASH_Infrastructure,0.677,80,10827,USAID
+2025-12-04,Chitungwiza,Hygiene_Promotion,0.63,17,37314,MSF
+2018-01-24,Gweru,WASH_Infrastructure,0.806,24,32636,MoHCC
+2019-05-01,Gweru,Water_Treatment,0.765,49,42597,MSF
+2019-05-10,Gweru,Water_Trucking,0.552,30,29051,UNICEF
+2019-06-23,Gweru,Case_Isolation,0.364,79,28364,USAID
+2019-11-15,Gweru,Water_Treatment,0.378,3,47394,WHO
+2020-11-10,Gweru,WASH_Infrastructure,0.776,58,45786,World Bank
+2021-03-08,Gweru,OCV_Campaign,0.304,78,41187,World Bank
+2021-03-20,Gweru,Water_Trucking,0.776,30,32831,World Bank
+2021-05-01,Gweru,WASH_Infrastructure,0.308,66,16256,USAID
+2021-07-20,Gweru,Case_Isolation,0.682,62,45369,World Bank
+2021-11-24,Gweru,Case_Isolation,0.232,67,28545,UNICEF
+2022-01-10,Gweru,Water_Treatment,0.254,83,17954,World Bank
+2023-05-08,Gweru,OCV_Campaign,0.816,53,3577,World Bank
+2023-06-04,Gweru,Water_Trucking,0.702,54,26784,MSF
+2024-08-02,Gweru,OCV_Campaign,0.326,28,28753,World Bank
+2025-04-14,Gweru,Water_Trucking,0.524,40,13257,MoHCC
+2025-06-02,Gweru,Hygiene_Promotion,0.811,21,46881,MSF
+2018-03-13,Harare,Water_Trucking,0.316,81,33037,WHO
+2018-03-17,Harare,WASH_Infrastructure,0.263,70,24855,MSF
+2018-06-07,Harare,Case_Isolation,0.582,82,18803,USAID
+2018-06-24,Harare,Water_Trucking,0.64,70,33157,USAID
+2019-05-17,Harare,Case_Isolation,0.606,78,45307,MoHCC
+2019-07-24,Harare,WASH_Infrastructure,0.561,17,17982,MoHCC
+2019-08-27,Harare,Case_Isolation,0.732,3,44165,UNICEF
+2020-05-08,Harare,Water_Treatment,0.331,29,47885,WHO
+2020-06-23,Harare,Water_Trucking,0.306,62,8184,USAID
+2020-08-10,Harare,Case_Isolation,0.535,44,22816,USAID
+2020-09-12,Harare,Case_Isolation,0.777,75,11418,UNICEF
+2021-01-23,Harare,Hygiene_Promotion,0.39,80,45713,WHO
+2021-07-17,Harare,Water_Treatment,0.659,81,42476,World Bank
+2021-08-24,Harare,Water_Treatment,0.713,80,21274,WHO
+2021-12-23,Harare,Water_Treatment,0.341,12,9531,MSF
+2022-02-10,Harare,Water_Treatment,0.527,76,30080,USAID
+2022-03-09,Harare,Water_Treatment,0.21,48,12618,MoHCC
+2022-03-15,Harare,WASH_Infrastructure,0.526,72,45442,USAID
+2022-03-18,Harare,Case_Isolation,0.406,85,18328,MoHCC
+2022-04-05,Harare,Case_Isolation,0.466,87,24887,UNICEF
+2022-10-03,Harare,Case_Isolation,0.362,34,46935,MoHCC
+2022-11-05,Harare,Hygiene_Promotion,0.793,39,21322,USAID
+2023-02-11,Harare,Hygiene_Promotion,0.515,86,24676,UNICEF
+2024-01-08,Harare,Hygiene_Promotion,0.314,61,15196,MSF
+2024-04-09,Harare,Case_Isolation,0.605,10,18971,MoHCC
+2024-06-06,Harare,OCV_Campaign,0.751,50,10919,World Bank
+2024-09-23,Harare,WASH_Infrastructure,0.326,50,15865,World Bank
+2024-12-04,Harare,Water_Treatment,0.428,23,15952,MSF
+2025-02-18,Harare,OCV_Campaign,0.807,29,22471,USAID
+2025-07-06,Harare,Hygiene_Promotion,0.473,88,26729,MoHCC
+2018-04-03,Kadoma,Water_Trucking,0.365,35,27930,MoHCC
+2018-06-14,Kadoma,WASH_Infrastructure,0.206,26,22520,MSF
+2018-07-18,Kadoma,Water_Trucking,0.316,70,18925,WHO
+2018-09-27,Kadoma,Water_Trucking,0.372,13,18895,WHO
+2019-09-06,Kadoma,Water_Trucking,0.349,40,44222,MSF
+2019-10-20,Kadoma,OCV_Campaign,0.733,35,26222,WHO
+2019-12-08,Kadoma,Hygiene_Promotion,0.401,15,4025,World Bank
+2020-01-03,Kadoma,Water_Trucking,0.853,40,41615,USAID
+2020-01-15,Kadoma,Case_Isolation,0.448,61,38338,WHO
+2020-02-07,Kadoma,Hygiene_Promotion,0.433,89,38202,UNICEF
+2020-05-05,Kadoma,Water_Treatment,0.201,12,10210,USAID
+2020-07-12,Kadoma,Hygiene_Promotion,0.666,34,15071,WHO
+2021-11-09,Kadoma,WASH_Infrastructure,0.833,14,47743,World Bank
+2022-02-01,Kadoma,OCV_Campaign,0.632,17,20058,MSF
+2022-11-27,Kadoma,Water_Treatment,0.2,17,6034,WHO
+2023-10-24,Kadoma,Water_Trucking,0.439,44,21083,MSF
+2023-11-26,Kadoma,Case_Isolation,0.404,32,26011,MSF
+2024-08-14,Kadoma,Case_Isolation,0.812,66,6530,WHO
+2024-09-11,Kadoma,Water_Trucking,0.672,15,5382,USAID
+2024-12-01,Kadoma,Case_Isolation,0.34,22,36539,UNICEF
+2025-02-13,Kadoma,Water_Treatment,0.656,8,10396,UNICEF
+2025-10-02,Kadoma,Hygiene_Promotion,0.609,52,34080,MSF
+2018-01-03,Kwekwe,Case_Isolation,0.698,57,25819,USAID
+2018-10-16,Kwekwe,OCV_Campaign,0.528,37,24182,MSF
+2018-12-22,Kwekwe,Hygiene_Promotion,0.608,43,47302,MoHCC
+2019-01-24,Kwekwe,Case_Isolation,0.456,64,37110,UNICEF
+2019-04-19,Kwekwe,OCV_Campaign,0.506,17,39044,UNICEF
+2019-06-15,Kwekwe,Case_Isolation,0.204,49,11160,UNICEF
+2019-09-06,Kwekwe,WASH_Infrastructure,0.493,3,5988,UNICEF
+2019-12-14,Kwekwe,Case_Isolation,0.593,8,37468,MoHCC
+2020-04-11,Kwekwe,OCV_Campaign,0.486,47,19513,USAID
+2020-06-02,Kwekwe,Water_Treatment,0.849,85,29721,WHO
+2020-06-17,Kwekwe,Hygiene_Promotion,0.362,81,1483,UNICEF
+2020-09-10,Kwekwe,Water_Treatment,0.732,46,32856,WHO
+2020-12-20,Kwekwe,Case_Isolation,0.897,12,21534,MSF
+2021-01-08,Kwekwe,Water_Treatment,0.701,42,38853,World Bank
+2021-09-08,Kwekwe,WASH_Infrastructure,0.613,80,6080,USAID
+2021-10-05,Kwekwe,WASH_Infrastructure,0.73,30,8257,MoHCC
+2021-11-11,Kwekwe,Water_Treatment,0.769,79,19705,WHO
+2022-03-06,Kwekwe,Hygiene_Promotion,0.335,28,22346,WHO
+2022-05-19,Kwekwe,Water_Treatment,0.615,55,6183,World Bank
+2022-07-15,Kwekwe,Water_Treatment,0.672,14,7037,WHO
+2022-10-16,Kwekwe,OCV_Campaign,0.707,3,6602,USAID
+2022-10-18,Kwekwe,Hygiene_Promotion,0.773,4,7950,MSF
+2023-07-16,Kwekwe,Water_Trucking,0.221,10,20515,WHO
+2023-09-04,Kwekwe,WASH_Infrastructure,0.21,34,33397,UNICEF
+2023-09-11,Kwekwe,Hygiene_Promotion,0.389,27,15283,UNICEF
+2023-10-13,Kwekwe,WASH_Infrastructure,0.886,9,32011,UNICEF
+2023-11-27,Kwekwe,Case_Isolation,0.524,23,4135,MSF
+2025-03-11,Kwekwe,Hygiene_Promotion,0.861,79,38616,MoHCC
+2025-04-10,Kwekwe,OCV_Campaign,0.305,70,8564,USAID
+2025-12-23,Kwekwe,Water_Treatment,0.719,35,7511,MSF
+2018-02-13,Masvingo,Water_Treatment,0.876,57,8918,World Bank
+2018-03-07,Masvingo,WASH_Infrastructure,0.718,83,24635,UNICEF
+2018-03-23,Masvingo,Water_Trucking,0.591,79,4870,World Bank
+2018-06-10,Masvingo,Water_Treatment,0.224,29,37132,UNICEF
+2018-07-12,Masvingo,OCV_Campaign,0.61,44,36519,WHO
+2018-10-07,Masvingo,Hygiene_Promotion,0.651,79,3757,World Bank
+2019-03-27,Masvingo,Water_Treatment,0.697,55,18850,WHO
+2019-05-25,Masvingo,OCV_Campaign,0.209,78,17587,World Bank
+2020-04-24,Masvingo,Case_Isolation,0.777,3,36465,MoHCC
+2020-05-05,Masvingo,OCV_Campaign,0.823,64,47669,USAID
+2020-07-11,Masvingo,Water_Treatment,0.668,5,9154,MSF
+2020-11-01,Masvingo,Case_Isolation,0.486,31,36941,WHO
+2020-12-23,Masvingo,Hygiene_Promotion,0.365,81,43197,WHO
+2021-09-15,Masvingo,Case_Isolation,0.436,38,39790,World Bank
+2021-09-24,Masvingo,WASH_Infrastructure,0.227,27,21676,MoHCC
+2021-12-09,Masvingo,Case_Isolation,0.61,9,12700,MSF
+2022-04-02,Masvingo,Water_Treatment,0.525,30,3031,USAID
+2022-05-23,Masvingo,WASH_Infrastructure,0.368,35,20271,World Bank
+2022-06-20,Masvingo,OCV_Campaign,0.433,9,6834,World Bank
+2022-08-21,Masvingo,WASH_Infrastructure,0.832,44,28058,MSF
+2022-12-06,Masvingo,Water_Trucking,0.69,42,34249,USAID
+2023-03-03,Masvingo,Hygiene_Promotion,0.499,55,31207,USAID
+2023-08-13,Masvingo,WASH_Infrastructure,0.299,36,20265,WHO
+2024-02-08,Masvingo,Water_Trucking,0.823,17,7169,MSF
+2024-03-20,Masvingo,Case_Isolation,0.502,32,38380,WHO
+2024-11-12,Masvingo,Hygiene_Promotion,0.731,87,47416,UNICEF
+2025-06-07,Masvingo,Water_Trucking,0.829,76,26875,MoHCC
+2025-06-25,Masvingo,Hygiene_Promotion,0.793,9,13732,World Bank
+2025-12-23,Masvingo,WASH_Infrastructure,0.312,39,7762,WHO
+2025-12-24,Masvingo,Hygiene_Promotion,0.626,65,32601,UNICEF
+2025-12-26,Masvingo,Hygiene_Promotion,0.675,88,20021,World Bank
+2018-05-01,Mutare,OCV_Campaign,0.54,73,28745,World Bank
+2018-05-03,Mutare,Water_Trucking,0.444,14,18065,UNICEF
+2018-05-04,Mutare,Water_Treatment,0.497,11,39323,World Bank
+2019-01-12,Mutare,WASH_Infrastructure,0.306,77,39254,USAID
+2019-01-22,Mutare,Hygiene_Promotion,0.787,47,22807,UNICEF
+2019-02-27,Mutare,Water_Trucking,0.602,69,33239,USAID
+2019-05-22,Mutare,WASH_Infrastructure,0.885,23,11884,MSF
+2019-07-07,Mutare,OCV_Campaign,0.374,50,18874,World Bank
+2020-02-15,Mutare,OCV_Campaign,0.333,66,39502,World Bank
+2020-04-13,Mutare,WASH_Infrastructure,0.449,15,2841,World Bank
+2020-06-09,Mutare,WASH_Infrastructure,0.442,81,12347,UNICEF
+2021-02-16,Mutare,OCV_Campaign,0.41,40,46300,USAID
+2021-08-19,Mutare,Water_Trucking,0.392,37,40361,UNICEF
+2022-02-22,Mutare,Water_Trucking,0.671,42,13241,USAID
+2022-04-10,Mutare,OCV_Campaign,0.204,12,24257,USAID
+2022-05-12,Mutare,Water_Trucking,0.702,36,35310,USAID
+2022-07-05,Mutare,Water_Trucking,0.616,15,11270,WHO
+2022-08-15,Mutare,WASH_Infrastructure,0.875,15,26279,MSF
+2022-09-08,Mutare,Water_Treatment,0.331,18,39100,MoHCC
+2022-09-18,Mutare,WASH_Infrastructure,0.747,36,4207,UNICEF
+2022-11-01,Mutare,Case_Isolation,0.303,13,26974,WHO
+2023-06-25,Mutare,WASH_Infrastructure,0.329,84,47766,USAID
+2023-07-25,Mutare,Water_Treatment,0.822,37,19244,MoHCC
+2023-08-20,Mutare,OCV_Campaign,0.873,50,45078,UNICEF
+2023-12-12,Mutare,Water_Trucking,0.495,58,1401,USAID
+2024-01-26,Mutare,OCV_Campaign,0.509,67,17095,MoHCC
+2024-03-05,Mutare,Case_Isolation,0.587,8,47051,MSF
+2024-03-11,Mutare,Hygiene_Promotion,0.805,53,2766,MSF
+2024-05-04,Mutare,WASH_Infrastructure,0.478,73,21917,UNICEF
+2024-09-11,Mutare,Water_Trucking,0.491,15,9361,UNICEF
+2024-09-15,Mutare,Water_Treatment,0.686,8,16907,World Bank
+2024-10-27,Mutare,OCV_Campaign,0.351,63,13545,MSF
+2024-11-08,Mutare,OCV_Campaign,0.248,41,36323,USAID
+2025-01-11,Mutare,OCV_Campaign,0.895,4,2396,MSF
+2025-04-01,Mutare,Case_Isolation,0.705,16,47661,WHO
+2025-06-01,Mutare,Hygiene_Promotion,0.371,54,30991,MoHCC
+2025-09-19,Mutare,Case_Isolation,0.784,23,29676,USAID
+2018-02-04,Norton,Water_Treatment,0.354,32,4984,MSF
+2018-02-20,Norton,Water_Treatment,0.291,79,44189,MoHCC
+2018-07-11,Norton,Water_Treatment,0.779,46,40004,UNICEF
+2018-07-18,Norton,Hygiene_Promotion,0.301,11,13955,World Bank
+2018-09-19,Norton,Water_Trucking,0.769,75,28584,World Bank
+2018-11-21,Norton,Water_Trucking,0.485,85,12532,MoHCC
+2019-01-15,Norton,Hygiene_Promotion,0.382,30,39946,WHO
+2020-07-25,Norton,Water_Treatment,0.564,85,1017,MSF
+2020-09-18,Norton,Case_Isolation,0.511,68,38447,MSF
+2021-01-16,Norton,Hygiene_Promotion,0.873,42,6421,MoHCC
+2021-02-03,Norton,Hygiene_Promotion,0.787,17,36523,UNICEF
+2021-05-23,Norton,Water_Treatment,0.687,78,6413,World Bank
+2021-06-08,Norton,Water_Trucking,0.308,26,40320,USAID
+2021-06-20,Norton,Water_Trucking,0.585,71,14803,UNICEF
+2021-09-19,Norton,Water_Treatment,0.642,24,38705,World Bank
+2021-09-19,Norton,Case_Isolation,0.571,35,44010,USAID
+2022-01-13,Norton,Water_Treatment,0.769,84,7035,WHO
+2022-02-17,Norton,Water_Trucking,0.332,59,8513,World Bank
+2022-03-02,Norton,WASH_Infrastructure,0.645,13,34117,WHO
+2022-08-21,Norton,Hygiene_Promotion,0.894,58,47349,WHO
+2022-09-13,Norton,WASH_Infrastructure,0.72,21,19514,WHO
+2022-10-21,Norton,Water_Treatment,0.748,27,843,World Bank
+2022-12-22,Norton,Hygiene_Promotion,0.821,23,39407,WHO
+2023-01-21,Norton,OCV_Campaign,0.361,63,5334,UNICEF
+2023-02-19,Norton,OCV_Campaign,0.383,82,6968,WHO
+2023-03-05,Norton,Water_Trucking,0.464,72,36032,WHO
+2023-06-18,Norton,WASH_Infrastructure,0.735,42,33808,World Bank
+2023-06-26,Norton,Case_Isolation,0.572,50,12116,UNICEF
+2023-07-04,Norton,Water_Treatment,0.642,78,46429,MoHCC
+2024-11-17,Norton,Hygiene_Promotion,0.779,10,9911,MoHCC
+2025-02-02,Norton,Hygiene_Promotion,0.361,49,21588,UNICEF
+2025-03-03,Norton,WASH_Infrastructure,0.525,67,46616,World Bank
+2025-11-02,Norton,WASH_Infrastructure,0.861,72,16678,MoHCC
