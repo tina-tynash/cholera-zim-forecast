@@ -1,0 +1,16 @@
+[server]
+headless = true
+enableCORS = false
+enableXsrfProtection = true
+
+[theme]
+base = "dark"
+primaryColor = "#e84040"
+backgroundColor = "#06090f"
+secondaryBackgroundColor = "#0c1120"
+textColor = "#dde4f0"
+font = "sans serif"
+
+[runner]
+# Allow imports from the project root
+fastReruns = true

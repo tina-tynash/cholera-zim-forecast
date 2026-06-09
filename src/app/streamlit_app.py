@@ -115,8 +115,26 @@ def load_data() -> pd.DataFrame:
         df["week_of_year"] = df["date"].dt.isocalendar().week.astype(int)
         df["is_rainy_season"] = df["month"].isin([11, 12, 1, 2, 3, 4]).astype(int)
     else:
-        st.error("⚠️ Data not found. Run: `python data/synthetic/generate_synthetic.py && python src/data/etl.py`")
-        st.stop()
+        # Auto-generate synthetic data on first run (e.g. Streamlit Cloud)
+        st.info("⏳ Generating synthetic data for first run — this takes ~20 seconds...")
+        try:
+            import subprocess, sys
+            out_dir = Path("data/processed")
+            out_dir.mkdir(parents=True, exist_ok=True)
+            subprocess.run(
+                [sys.executable, "data/synthetic/generate_synthetic.py",
+                 "--output-dir", str(out_dir)],
+                check=True, capture_output=True,
+            )
+            df = pd.read_csv(cases_path, parse_dates=["date"])
+            df["year"] = df["date"].dt.year
+            df["month"] = df["date"].dt.month
+            df["week_of_year"] = df["date"].dt.isocalendar().week.astype(int)
+            df["is_rainy_season"] = df["month"].isin([11, 12, 1, 2, 3, 4]).astype(int)
+        except Exception as exc:
+            st.error(f"❌ Could not generate data: {exc}")
+            st.error("Run locally: python data/synthetic/generate_synthetic.py && python src/data/etl.py")
+            st.stop()
 
     return df
 
@@ -224,12 +242,23 @@ def make_forecast_chart(
     ))
 
     # Vertical line at forecast start
-    split_date = d["date"].max()
-    fig.add_vline(
-        x=split_date, line_dash="dash", line_color="#555",
-        annotation_text="Forecast →",
-        annotation_font_color="#888",
-        annotation_font_size=11,
+    # NOTE: fig.add_vline() crashes with pandas Timestamps on Plotly 5+/6+.
+    # Use add_shape + add_annotation to bypass the broken internal _mean() path.
+    split_date_str = str(d["date"].max().date())
+    fig.add_shape(
+        type="line",
+        x0=split_date_str, x1=split_date_str,
+        y0=0, y1=1,
+        xref="x", yref="paper",
+        line=dict(dash="dash", color="#555", width=1.5),
+    )
+    fig.add_annotation(
+        x=split_date_str, y=0.97,
+        xref="x", yref="paper",
+        text="Forecast →",
+        showarrow=False,
+        font=dict(color="#888", size=11),
+        xanchor="left", yanchor="top",
     )
 
     fig.update_layout(

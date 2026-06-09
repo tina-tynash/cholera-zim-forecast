@@ -97,8 +97,13 @@ fig3.add_trace(go.Scatter(
     marker=dict(size=8),
     name="Projected Annual Cases",
 ))
-fig3.add_hline(y=baseline_cases, line_dash="dash", line_color="#c0392b",
-               annotation_text=f"Baseline: {baseline_cases:,} cases")
+fig3.add_shape(type="line", x0=0, x1=1, xref="paper",
+               y0=baseline_cases, y1=baseline_cases, yref="y",
+               line=dict(dash="dash", color="#c0392b", width=1.5))
+fig3.add_annotation(x=0.02, y=baseline_cases, xref="paper", yref="y",
+                    text=f"Baseline: {baseline_cases:,} cases",
+                    showarrow=False, font=dict(color="#c0392b", size=11),
+                    xanchor="left", yanchor="bottom")
 fig3.update_layout(
     title="What-If Simulator: Impact of WASH Improvement on Annual Cholera Cases",
     xaxis_title="WASH Coverage Improvement (%)",
