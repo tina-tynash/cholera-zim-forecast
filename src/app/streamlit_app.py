@@ -667,7 +667,7 @@ def main():
                 mime="text/csv",
             )
 
-            # Excel export
+           # Excel export — openpyxl engine 
             excel_buf = io.BytesIO()
             with pd.ExcelWriter(excel_buf, engine="xlsxwriter") as writer:
                 df_filtered.to_excel(writer, sheet_name="Cases", index=False)
